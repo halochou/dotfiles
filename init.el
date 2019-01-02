@@ -1,4 +1,8 @@
+(when (member "SF Mono" (font-family-list))
+  (set-face-attribute 'default nil :font "SF Mono-14"))
 (menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 (global-display-line-numbers-mode)
 
 ;; Package configs
@@ -10,6 +14,7 @@
   (package-install 'use-package))
 (require 'use-package)
 
+
 ;; (use-package benchmark-init
 ;;   :ensure t
 ;;   :config
@@ -20,6 +25,7 @@
 (use-package evil
   :ensure t
   :init
+  (setq evil-want-integration t) 
   (setq evil-want-keybinding nil)
   (setq evil-toggle-key "")
   (setq evil-search-module 'evil-search)
@@ -28,12 +34,12 @@
 ;;  (setcdr evil-insert-state-map nil)
   )
 
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :custom (evil-collection-setup-minibuffer t)
-  :init
-  (evil-collection-init))
+;;(use-package evil-collection
+;;  :after evil
+;;  :ensure t
+;;  ;;:custom (evil-collection-setup-minibuffer t)
+;;  :config
+;;  (evil-collection-init))
 
 (use-package evil-numbers
   :after evil
@@ -43,10 +49,10 @@
   ;; (define-key evil-normal-state-map (kbd "C-S-A") 'evil-numbers/dec-at-pt)
 )
 
-(use-package nord-theme
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'nord t))
+  (load-theme 'doom-vibrant t))
 
 (use-package json-mode
   :ensure t)
@@ -64,9 +70,15 @@
 )
 
 (use-package fzf
-:ensure t
+  :ensure t
   :config
   (define-key evil-normal-state-map (kbd "C-p") 'fzf))
+
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme))
+ 
 
 ;; NeoTree
 ;; (use-package neotree
@@ -77,6 +89,11 @@
 ;; Show matching paren
 (setq show-paren-delay 0)
 (show-paren-mode 1)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1)
 
 ;; Disable backup files
 (setq make-backup-files nil) ; stop creating backup~ files
@@ -102,7 +119,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-collection-setup-minibuffer t)
+ '(evil-collection-setup-minibuffer t t)
  '(package-selected-packages
    (quote
     (nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete))))
