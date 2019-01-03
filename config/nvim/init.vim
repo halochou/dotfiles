@@ -2,14 +2,17 @@ if &compatible
     set nocompatible
 endif
 
-call plug#begin('~/.vim/plugged')
+filetype plugin indent on
 
-Plug 'morhetz/gruvbox'
+
+call plug#begin('~/.config/nvim/plugged')
+
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'raimondi/delimitmate'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 "Plug 'easymotion/vim-easymotion'
@@ -20,39 +23,41 @@ Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tpope/vim-repeat'
+Plug 'mhartington/oceanic-next'
+"Plug 'konfekt/fastfold'
 "Plug 'blueyed/vim-diminactive'
+Plug 'thaerkh/vim-workspace'
 
 call plug#end()
 
-"let g:nord_italic = 1
-"let g:nord_italic_comments = 1
-"let g:nord_uniform_status_lines = 1
-"let g:nord_cursor_line_number_background = 1
-"colorscheme nord
-
-let g:gruvbox_italic = 1
-let g:gruvbox_improved_strings = 1
-let g:gruvbox_improved_warnings = 1
-set background=dark
-colorscheme gruvbox
+"let g:onedark_terminal_italics = 1
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
 
 map <C-i> :NERDTreeToggle<CR>
 
 nnoremap <C-p> :FZF<CR>
 
-let g:lightline = {'colorscheme': 'gruvbox'}
+"let g:lightline = {'colorscheme': 'onedark'}
 
 "map  <leader>f <Plug>(easymotion-bd-f)
 "nmap <leader>f <Plug>(easymotion-overwin-f)
 "nmap s <Plug>(easymotion-overwin-f2)
 
+let g:workspace_session_directory = $HOME . '/.local/share/nvim/sessions/'
+let g:workspace_session_disable_on_args = 1
+let g:workspace_autosave = 0
+let g:workspace_undodir=$HOME . '/.local/share/nvim/undodir/'
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-" Required:
-filetype plugin indent on
+let g:ale_enabled = 0
+let g:ale_completion_enabled = 1
+nmap <silent> <C-b> <Plug>(ale_previous_wrap)
+nmap <silent> <C-f> <Plug>(ale_next_wrap)
 
 "" Basic Setup
 "*****************************************************************************"
@@ -100,6 +105,8 @@ nnoremap <return> za
 "" Directories for swp files
 set nobackup
 set noswapfile
+
+set shellcmdflag=-ic
 
 set fileformats=unix,dos,mac
 
@@ -209,11 +216,13 @@ nnoremap <silent> <leader>bn :bn<CR>
 nnoremap <silent> <leader>bp :bp<CR>
 nnoremap <silent> <leader>bc :new<CR>
 
+nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
+
 "" Copy/Paste/Cut
-set clipboard=unnamed
+"set clipboard=unnamed
 if has('macunix')
-    vmap <C-x> :!pbcopy<CR>
-    vmap <C-c> :w !pbcopy<CR><CR>
+    "vmap <C-y> :!pbcopy<CR>
+    vmap <C-y> :w !pbcopy<CR><CR>
 endif
 
 "" Tabs

@@ -83,6 +83,7 @@
 
 ;; (load-theme 'tango-dark)
 
+(setq truncate-lines 1)
 ;; Show matching paren
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -121,7 +122,7 @@ scroll-preserve-screen-position 1)
  '(evil-collection-setup-minibuffer t t)
  '(package-selected-packages
    (quote
-    (## neotree nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete)))
+    (flx-ido ## neotree nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete)))
  '(smooth-scroll-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
