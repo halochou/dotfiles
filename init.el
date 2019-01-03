@@ -4,6 +4,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (global-display-line-numbers-mode)
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; Package configs
 (require 'package)
@@ -27,10 +28,12 @@
   :init
   (setq evil-want-integration t) 
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
   (setq evil-toggle-key "")
   (setq evil-search-module 'evil-search)
   :config
   (evil-mode 1)
+  (modify-syntax-entry ?_ "w")
 ;;  (setcdr evil-insert-state-map nil)
   )
 
@@ -69,20 +72,14 @@
   (highlight-indentation-mode 1)
 )
 
-(use-package fzf
-  :ensure t
-  :config
-  (define-key evil-normal-state-map (kbd "C-p") 'fzf))
-
 (use-package powerline
   :ensure t
   :config
   (powerline-default-theme))
- 
 
 ;; NeoTree
-;; (use-package neotree
-;;   :ensure t)
+(use-package neotree
+  :ensure t)
 
 ;; (load-theme 'tango-dark)
 
@@ -94,6 +91,8 @@
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1)
+(setq scroll-conservatively 10000
+scroll-preserve-screen-position 1)
 
 ;; Disable backup files
 (setq make-backup-files nil) ; stop creating backup~ files
@@ -122,7 +121,8 @@
  '(evil-collection-setup-minibuffer t t)
  '(package-selected-packages
    (quote
-    (nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete))))
+    (## neotree nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete)))
+ '(smooth-scroll-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
