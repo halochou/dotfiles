@@ -1,5 +1,5 @@
-(when (member "SF Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "SF Mono-14"))
+(when (member "M+ 1mn" (font-family-list))
+  (set-face-attribute 'default nil :font "M+ 1mn-15"))
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -8,7 +8,7 @@
 
 ;; Package configs
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -33,16 +33,17 @@
   (setq evil-search-module 'evil-search)
   :config
   (evil-mode 1)
+  (hs-minor-mode 1)
   (modify-syntax-entry ?_ "w")
 ;;  (setcdr evil-insert-state-map nil)
-  )
+)
 
-;;(use-package evil-collection
-;;  :after evil
-;;  :ensure t
-;;  ;;:custom (evil-collection-setup-minibuffer t)
-;;  :config
-;;  (evil-collection-init))
+(use-package evil-collection
+  :after evil
+  :ensure t
+  ;;:custom (evil-collection-setup-minibuffer t)
+  :config
+  (evil-collection-init))
 
 (use-package evil-numbers
   :after evil
@@ -72,14 +73,9 @@
   (highlight-indentation-mode 1)
 )
 
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
-
 ;; NeoTree
-(use-package neotree
-  :ensure t)
+;(use-package neotree
+  ;:ensure t)
 
 ;; (load-theme 'tango-dark)
 
@@ -112,18 +108,15 @@ scroll-preserve-screen-position 1)
 (define-key evil-normal-state-map (kbd "_") 'split-window-vertically)
 (define-key evil-normal-state-map (kbd "SPC b b") 'buffer-menu)
 (define-key evil-normal-state-map (kbd "SPC SPC") 'evil-ex-nohighlight)
-
-
+(define-key evil-normal-state-map (kbd "RET") 'evil-toggle-fold)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-collection-setup-minibuffer t t)
  '(package-selected-packages
    (quote
-    (flx-ido ## neotree nord-theme use-package json-mode highlight-indentation fzf evil-numbers evil-collection auto-complete)))
- '(smooth-scroll-mode t))
+    (origami use-package powerline neotree json-mode highlight-indentation evil-numbers evil doom-themes auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
