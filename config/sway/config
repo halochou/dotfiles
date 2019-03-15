@@ -17,7 +17,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec rofi -show drun
 
 # focus_follows_mouse no
 
