@@ -5,7 +5,7 @@ endif
 filetype plugin indent on
 
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'raimondi/delimitmate'
@@ -23,23 +23,28 @@ Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tpope/vim-repeat'
-Plug 'mhartington/oceanic-next'
 "Plug 'konfekt/fastfold'
 "Plug 'blueyed/vim-diminactive'
 Plug 'thaerkh/vim-workspace'
+"Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'joshdick/onedark.vim'
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+"Plug 'elzr/vim-json'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
-"let g:onedark_terminal_italics = 1
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
+"set background=dark
+colorscheme onedark
+let g:onedark_terminal_italics = 1
 
 map <C-i> :NERDTreeToggle<CR>
 
 nnoremap <C-p> :FZF<CR>
 
-"let g:lightline = {'colorscheme': 'onedark'}
+let g:lightline = {'colorscheme': 'onedark'}
 
 "map  <leader>f <Plug>(easymotion-bd-f)
 "nmap <leader>f <Plug>(easymotion-overwin-f)
@@ -54,10 +59,12 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-let g:ale_enabled = 0
-let g:ale_completion_enabled = 1
+let g:ale_enabled = 1
+"let g:ale_completion_enabled = 1
 nmap <silent> <C-b> <Plug>(ale_previous_wrap)
 nmap <silent> <C-f> <Plug>(ale_next_wrap)
+
+let g:gitgutter_max_signs = 10000
 
 "" Basic Setup
 "*****************************************************************************"
@@ -66,7 +73,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set bomb
-set binary
+"set binary
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -92,8 +99,8 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 "" Folding
 set foldenable
-set foldlevelstart=10
-set foldnestmax=3
+set foldlevelstart=1
+"set foldnestmax=6
 set foldmethod=syntax
 nnoremap <return> za
 
@@ -108,7 +115,7 @@ set noswapfile
 
 set shellcmdflag=-ic
 
-set fileformats=unix,dos,mac
+"set fileformats=dos,unix,mac
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -124,7 +131,7 @@ set ruler
 set number
 set showcmd
 set nowrap
-set relativenumber
+"set relativenumber
 set cursorline
 set lazyredraw
 set showmatch
@@ -219,11 +226,11 @@ nnoremap <silent> <leader>bc :new<CR>
 nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
 
 "" Copy/Paste/Cut
-"set clipboard=unnamed
-if has('macunix')
+set clipboard=unnamed
+"if has('macunix')
     "vmap <C-y> :!pbcopy<CR>
-    vmap <C-y> :w !pbcopy<CR><CR>
-endif
+    "vmap <C-y> :w !pbcopy<CR><CR>
+"endif
 
 "" Tabs
 nnoremap <C-[> gt
