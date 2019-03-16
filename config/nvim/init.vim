@@ -226,10 +226,10 @@ nnoremap <silent> <leader>bc :new<CR>
 nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
 
 "" Copy/Paste/Cut
-set clipboard=unnamed
+set clipboard=unnamedplus
 "if has('macunix')
-    "vmap <C-y> :!pbcopy<CR>
-    "vmap <C-y> :w !pbcopy<CR><CR>
+"vmap <C-y> :!wl-copy<CR>
+"vmap <C-y> :w !pbcopy<CR><CR>
 "endif
 
 "" Tabs
