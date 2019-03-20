@@ -33,6 +33,7 @@ Plug 'joshdick/onedark.vim'
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 "Plug 'elzr/vim-json'
 Plug 'tpope/vim-surround'
+Plug 'Chiel92/vim-autoformat'
 
 call plug#end()
 
