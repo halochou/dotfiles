@@ -1,47 +1,39 @@
-if &compatible
+﻿if &compatible
     set nocompatible
 endif
 
 filetype plugin indent on
 
-
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'raimondi/delimitmate'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
-"Plug 'easymotion/vim-easymotion'
 "Plug 'vim-scripts/VisIncr'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tpope/vim-repeat'
-"Plug 'konfekt/fastfold'
-"Plug 'blueyed/vim-diminactive'
+Plug 'Konfekt/FastFold'
+Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
-"Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'joshdick/onedark.vim'
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-"Plug 'elzr/vim-json'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
 
 call plug#end()
 
-"set background=dark
+set background=dark
 colorscheme onedark
 let g:onedark_terminal_italics = 1
-
-map <C-i> :NERDTreeToggle<CR>
 
 nnoremap <C-p> :FZF<CR>
 
@@ -56,6 +48,8 @@ let g:workspace_session_disable_on_args = 1
 let g:workspace_autosave = 0
 let g:workspace_undodir=$HOME . '/.local/share/nvim/undodir/'
 
+let g:deoplete#enable_at_startup = 1
+
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
@@ -65,7 +59,13 @@ let g:ale_enabled = 1
 nmap <silent> <C-b> <Plug>(ale_previous_wrap)
 nmap <silent> <C-f> <Plug>(ale_next_wrap)
 
-let g:gitgutter_max_signs = 10000
+"if executable('pyls')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'pyls',
+        "\ 'cmd': {server_info->['pyls']},
+        "\ 'whitelist': ['python'],
+        "\ })
+"endif
 
 "" Basic Setup
 "*****************************************************************************"
@@ -96,7 +96,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-nnoremap <leader><space> :nohlsearch<CR>
 
 "" Folding
 set foldenable
@@ -109,6 +108,9 @@ nnoremap <return> za
 "nnoremap j gj
 "nnoremap k gk
 "inoremap jk <esc>
+"
+set complete-=i   " disable scanning included files
+set complete-=t   " disable searching tags
 
 "" Directories for swp files
 set nobackup
@@ -133,12 +135,12 @@ set number
 set showcmd
 set nowrap
 "set relativenumber
-set cursorline
+"set cursorline
 set lazyredraw
 set showmatch
 set wildmenu
 
-"set synmaxcol=128
+set synmaxcol=200
 "syntax sync minlines=256
 
 "let no_buffers_menu=1
@@ -180,11 +182,12 @@ cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+cnoreabbrev Bd bd
 
 " terminal emulation
 "nnoremap <silent> <leader>t :terminal<CR>
 if has('nvim')
-    tnoremap <Esc> <C-\><C-n> 
+    tnoremap <Esc> <C-\><C-n>
     tnoremap <C-v><Esc> <Esc>
 endif
 
@@ -228,15 +231,16 @@ nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
 
 "" Copy/Paste/Cut
 set clipboard=unnamedplus
-"if has('macunix')
-"vmap <C-y> :!wl-copy<CR>
-"vmap <C-y> :w !pbcopy<CR><CR>
-"endif
 
 "" Tabs
 nnoremap <C-[> gt
 nnoremap <C-]> gT
 nnoremap <C-t> :tabnew<CR>
+
+cnoremap <c-n>  <down>
+cnoremap <c-p>  <up>
+
+nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 "" Switching windows
 noremap <C-j> <C-w>j
