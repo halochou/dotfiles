@@ -1,11 +1,10 @@
 ﻿if &compatible
     set nocompatible
 endif
-
-filetype plugin indent on
+let g:ale_enabled = 1
 
 call plug#begin('~/.local/share/nvim/plugged')
-
+Plug 'tpope/vim-sensible'
 Plug 'raimondi/delimitmate'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -28,7 +27,6 @@ Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
-
 call plug#end()
 
 set background=dark
@@ -54,7 +52,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-let g:ale_enabled = 1
 "let g:ale_completion_enabled = 1
 nmap <silent> <C-b> <Plug>(ale_previous_wrap)
 nmap <silent> <C-f> <Plug>(ale_next_wrap)
@@ -76,9 +73,6 @@ set fileencodings=utf-8
 set bomb
 "set binary
 
-"" Fix backspace indent
-set backspace=indent,eol,start
-
 "" Tabs. May be overriten by autocmd rules
 set tabstop=4
 set softtabstop=4
@@ -93,7 +87,6 @@ set hidden
 
 "" Searching
 set hlsearch
-set incsearch
 set ignorecase
 set smartcase
 
@@ -109,7 +102,6 @@ nnoremap <return> za
 "nnoremap k gk
 "inoremap jk <esc>
 "
-set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
 
 "" Directories for swp files
@@ -129,8 +121,6 @@ endif
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
-syntax on
-set ruler
 set number
 set showcmd
 set nowrap
@@ -138,7 +128,6 @@ set nowrap
 "set cursorline
 set lazyredraw
 set showmatch
-set wildmenu
 
 set synmaxcol=200
 "syntax sync minlines=256
@@ -153,7 +142,6 @@ set termguicolors
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
-set scrolloff=3
 
 "" Use modeline overrides
 "set modeline
@@ -208,9 +196,6 @@ augroup END
 
 au TermOpen * setlocal nonumber norelativenumber
 
-
-set autoread
-
 "*****************************************************************************
 "" Mappings
 "*****************************************************************************
@@ -240,7 +225,7 @@ nnoremap <C-t> :tabnew<CR>
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
-nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+"nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 "" Switching windows
 noremap <C-j> <C-w>j
