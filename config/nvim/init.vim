@@ -2,6 +2,7 @@
     set nocompatible
 endif
 let g:ale_enabled = 1
+let g:ale_completion_enabled = 0
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
@@ -52,7 +53,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-"let g:ale_completion_enabled = 1
 nmap <silent> <C-b> <Plug>(ale_previous_wrap)
 nmap <silent> <C-f> <Plug>(ale_next_wrap)
 
@@ -103,6 +103,8 @@ nnoremap <return> za
 "inoremap jk <esc>
 "
 set complete-=t   " disable searching tags
+
+set iskeyword-=_
 
 "" Directories for swp files
 set nobackup
