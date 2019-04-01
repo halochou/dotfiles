@@ -1,8 +1,9 @@
 ﻿if &compatible
     set nocompatible
 endif
-let g:ale_enabled = 1
-let g:ale_completion_enabled = 0
+"let g:ale_enabled = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_go_bingo_executable = 'gopls'
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
@@ -14,7 +15,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 "Plug 'vim-scripts/VisIncr'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'tpope/vim-repeat'
@@ -27,11 +28,21 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+"Plug 'deoplete-plugins/deoplete-jedi'
 call plug#end()
 
 let g:gruvbox_italic = 1
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ 'go': ['/Users/yanzhou3/go/bin/gopls']
+    \ }
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+
 set background=dark
 colorscheme gruvbox
 "let g:onedark_terminal_italics = 1
@@ -106,7 +117,7 @@ nnoremap <return> za
 "
 set complete-=t   " disable searching tags
 
-set iskeyword-=_
+"set iskeyword-=_
 
 "" Directories for swp files
 set nobackup
@@ -229,7 +240,7 @@ nnoremap <C-t> :tabnew<CR>
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
-"nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 "" Switching windows
 noremap <C-j> <C-w>j
