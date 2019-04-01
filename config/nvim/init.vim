@@ -23,16 +23,18 @@ Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 call plug#end()
 
+let g:gruvbox_italic = 1
 set background=dark
-colorscheme onedark
-let g:onedark_terminal_italics = 1
+colorscheme gruvbox
+"let g:onedark_terminal_italics = 1
 
 nnoremap <C-p> :FZF<CR>
 

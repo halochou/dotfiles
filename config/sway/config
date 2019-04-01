@@ -68,8 +68,8 @@ input "1241:64519:USB_Gaming_Mouse" {
 #input "3141:26433:SONiX_USB_DEVICE" {
 input "1133:50484:Logitech_USB_Receiver" {
     xkb_options ctrl:nocaps,altwin:swap_alt_win
-    repeat_delay 180
-    repeat_rate 20
+    repeat_delay 200
+    repeat_rate 30
 }
 
 #gaps inner 0

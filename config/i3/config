@@ -11,17 +11,15 @@ font xft:RobotoCondensed 10
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+space exec rofi -show run
-#bindsym $mod+space exec dmenu_run
 
-# focus_follows_mouse no
+focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
@@ -53,7 +51,7 @@ bindsym $mod+Shift+Right move right
 # split orientation
 bindsym $mod+bar split h;exec notify-send 'tile horizontally'
 bindsym $mod+minus split v;exec notify-send 'tile vertically'
-bindsym $mod+Shift+q split toggle
+# bindsym $mod+Shift+q split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -62,8 +60,8 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+space floating toggle
 
 #navigate workspaces next / previous
-bindsym $mod+bracketright workspace next
-bindsym $mod+bracketleft workspace prev
+#bindsym $mod+bracketright workspace next
+#bindsym $mod+bracketleft workspace prev
 
 # Workspace names
 set $ws1 1
@@ -97,15 +95,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 
 bindsym $mod+o move container to output right
 
-workspace 1 output DP-2
-workspace 2 output DP-2
-workspace 3 output DP-2
-workspace 4 output DP-2
-workspace 5 output DP-4
-workspace 6 output DP-4
-workspace 7 output DP-4
-workspace 8 output DP-4
-
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
@@ -119,19 +108,15 @@ for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="^.*"] border pixel 5
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i2 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-msg exit"
+bindsym $mod+Shift+e exit
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -153,29 +138,26 @@ mode "resize" {
 }
 
 # Autostart applications
-exec_always --no-startup-id xrandr --output DP-2 --primary --mode 1920x1080 --rotate normal --output DP-5 --mode 1280x1024 --pos 1920x0
-exec_always --no-startup-id "nitrogen --restore"
-# exec --no-startup-id redshift
+# exec_always --no-startup-id xrandr --output DP-2 --primary --mode 1920x1080 --rotate normal --output DP-5 --mode 1280x1024 --pos 1920x0
+# exec_always --no-startup-id "nitrogen --restore"
+exec --no-startup-id redshift
 exec_always --no-startup-id "dropbox start"
-#exec_always --no-startup-id mate-settings-daemon
 exec --no-startup-id nm-applet
-#exec_always --no-startup-id mate-power-manager
 
 exec_always --no-startup-id xset -b
-exec_always --no-startup-id xset r rate 250 50
+exec_always --no-startup-id xset r rate 250 60
 exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
-#exec_always --no-startup-id xrdb ~/.Xresources
 
 # Set inner/outer gaps
-#gaps inner 7
-#gaps outer 0
+# gaps inner 7
+# gaps outer 0
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
+# smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-#smart_borders on
+# smart_borders on
 
 
 ## Base16 OceanicNext
@@ -198,9 +180,9 @@ set $base0F #AB7967
 
 # Basic bar configuration using the Base16 variables.
 bar {
-    status_command i3status
+    #status_command i3status
+    mode hide
     position top
-    tray_output DP-2
     strip_workspace_numbers yes
     workspace_buttons yes
     colors {
@@ -209,11 +191,11 @@ bar {
         statusline $base04
 
         # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
+        focused_workspace   $base0D $base0D $base00
+        active_workspace    $base03 $base03 $base00
+        inactive_workspace  $base01 $base01 $base05
         urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
+        binding_mode        $base0A $base0A $base00
     }
 }
 
@@ -225,4 +207,3 @@ client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background $base07
-
