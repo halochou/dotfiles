@@ -1,6 +1,8 @@
 ﻿if &compatible
     set nocompatible
 endif
+set termguicolors
+set t_Co=256
 "let g:ale_enabled = 1
 "let g:ale_completion_enabled = 1
 "let g:ale_go_bingo_executable = 'gopls'
@@ -8,7 +10,7 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'raimondi/delimitmate'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -24,8 +26,7 @@ Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
-"Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -33,10 +34,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'deoplete-plugins/deoplete-jedi'
 call plug#end()
 
-let g:gruvbox_italic = 1
 let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls'],
     \ 'go': ['/Users/yanzhou3/go/bin/gopls']
@@ -44,8 +43,9 @@ let g:LanguageClient_serverCommands = {
 autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 set background=dark
-colorscheme gruvbox
-"let g:onedark_terminal_italics = 1
+
+let g:onedark_terminal_italics = 1
+colorscheme onedark
 
 nnoremap <C-p> :FZF<CR>
 
@@ -151,8 +151,6 @@ set synmaxcol=200
 
 set mousemodel=popup
 set mouse=a
-set termguicolors
-"set t_Co=256
 "
 
 "" Disable the blinking cursor.
