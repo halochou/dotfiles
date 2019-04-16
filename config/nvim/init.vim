@@ -2,7 +2,7 @@
     set nocompatible
 endif
 set termguicolors
-set t_Co=256
+"set t_Co=256
 "let g:ale_enabled = 1
 "let g:ale_completion_enabled = 1
 "let g:ale_go_bingo_executable = 'gopls'
@@ -26,7 +26,8 @@ Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -44,12 +45,15 @@ autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 set background=dark
 
-let g:onedark_terminal_italics = 1
-colorscheme onedark
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
+colorscheme nord
 
 nnoremap <C-p> :FZF<CR>
 
-let g:lightline = {'colorscheme': 'onedark'}
+let g:lightline = {'colorscheme': 'nord'}
 
 "map  <leader>f <Plug>(easymotion-bd-f)
 "nmap <leader>f <Plug>(easymotion-overwin-f)
