@@ -20,14 +20,14 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
-"Plug 'joshdick/onedark.vim'
-Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -45,15 +45,12 @@ autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 set background=dark
 
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-let g:nord_cursor_line_number_background = 1
-colorscheme nord
+let g:onedark_terminal_italics=1
+colorscheme onedark
 
 nnoremap <C-p> :FZF<CR>
 
-let g:lightline = {'colorscheme': 'nord'}
+let g:lightline = {'colorscheme': 'onedark'}
 
 "map  <leader>f <Plug>(easymotion-bd-f)
 "nmap <leader>f <Plug>(easymotion-overwin-f)
@@ -64,6 +61,7 @@ let g:workspace_session_disable_on_args = 1
 let g:workspace_autosave = 0
 let g:workspace_undodir=$HOME . '/.local/share/nvim/undodir/'
 
+let g:deoplete#auto_complete_delay = 100
 let g:deoplete#enable_at_startup = 1
 
 let g:indent_guides_enable_on_vim_startup = 1
@@ -106,6 +104,7 @@ set hidden
 set hlsearch
 set ignorecase
 set smartcase
+set nowrapscan
 
 "" Folding
 set foldenable
