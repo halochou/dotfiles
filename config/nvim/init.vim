@@ -85,7 +85,7 @@ nmap <silent> <C-f> <Plug>(ale_next_wrap)
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
-set bomb
+set nobomb
 "set binary
 
 "" Tabs. May be overriten by autocmd rules
@@ -105,6 +105,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set nowrapscan
+nnoremap * *N
 
 "" Folding
 set foldenable
@@ -169,8 +170,8 @@ set titlestring=%F
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 "*****************************************************************************
 "" Abbreviations
