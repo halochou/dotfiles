@@ -5,7 +5,7 @@ new_float normal
 
 #hide_edge_borders none
 
-font xft:RobotoCondensed 10
+font xft:Futura 11
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -17,7 +17,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec rofi -show drun
 
 focus_follows_mouse no
 
@@ -96,18 +96,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+o move container to output right
 
 # Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-#for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -138,15 +128,17 @@ mode "resize" {
 }
 
 # Autostart applications
-# exec_always --no-startup-id xrandr --output DP-2 --primary --mode 1920x1080 --rotate normal --output DP-5 --mode 1280x1024 --pos 1920x0
-# exec_always --no-startup-id "nitrogen --restore"
-exec --no-startup-id redshift
-exec_always --no-startup-id "dropbox start"
-exec --no-startup-id nm-applet
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id gnome-flashback
 
-exec_always --no-startup-id xset -b
-exec_always --no-startup-id xset r rate 250 60
-exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
+exec_always --no-startup-id "dropbox start"
+# exec --no-startup-id nm-applet
+
+# exec_always --no-startup-id xset -b
+# exec_always --no-startup-id xset r rate 250 60
+# exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
 
 # Set inner/outer gaps
 # gaps inner 7
@@ -181,7 +173,6 @@ set $base0F #AB7967
 # Basic bar configuration using the Base16 variables.
 bar {
     #status_command i3status
-    mode hide
     position top
     strip_workspace_numbers yes
     workspace_buttons yes

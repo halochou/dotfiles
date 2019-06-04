@@ -9,8 +9,7 @@ set termguicolors
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'raimondi/delimitmate'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -19,7 +18,7 @@ Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'
 "Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
+"Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 "Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
@@ -28,13 +27,14 @@ Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'joshdick/onedark.vim'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'Chiel92/vim-autoformat'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ap/vim-buftabline'
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 let g:LanguageClient_serverCommands = {
@@ -49,6 +49,8 @@ let g:onedark_terminal_italics=1
 colorscheme onedark
 
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-Space> :Lines<CR>
+nnoremap <leader>n :Lexplore<CR>
 
 let g:lightline = {'colorscheme': 'onedark'}
 
@@ -95,7 +97,7 @@ set shiftwidth=4
 set expandtab
 
 "" Map leader to ,
-let mapleader=' '
+let mapleader="\<Space>"
 
 "" Enable hidden buffers
 set hidden
@@ -113,6 +115,14 @@ set foldlevelstart=1
 "set foldnestmax=6
 set foldmethod=syntax
 nnoremap <return> za
+
+nnoremap <leader>w :w<cr>
+
+inoremap ( ()<Left>
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
 
 "" Movement
 "nnoremap j gj
@@ -223,32 +233,46 @@ set splitright
 noremap _ :<C-u>split<CR>
 noremap \| :<C-u>vsplit<CR>
 
-nnoremap <silent> <leader>bb :Buffers<CR>
-nnoremap <silent> <leader>bd :bd<CR>
-nnoremap <silent> <leader>bn :bn<CR>
-nnoremap <silent> <leader>bp :bp<CR>
-nnoremap <silent> <leader>bc :new<CR>
-
 nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
 
 "" Copy/Paste/Cut
 set clipboard=unnamedplus
 
-"" Tabs
-nnoremap <C-[> gt
-nnoremap <C-]> gT
-nnoremap <C-t> :tabnew<CR>
+nnoremap <leader>B :enew<cr>
+nnoremap <Tab> :bnext<cr>
+nnoremap <S-Tab> :bprevious<cr>
+nnoremap <leader>bq :bp <bar> bd! #<cr>
+nnoremap <leader>ba :bufdo bd!<cr>
+"cycle between last two open buffers
+nnoremap <leader><leader> <c-^>
 
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
-nnoremap <leader><space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 "" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
+"noremap <C-h> <C-w>h
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
+nnoremap <silent> <C-j> :call WinMove('j')<cr>
+nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
+
+function! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+  if (t:curwin == winnr())
+    if (match(a:key,'[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec "wincmd ".a:key
+  endif
+endfunction
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
