@@ -1,12 +1,3 @@
-﻿if &compatible
-    set nocompatible
-endif
-set termguicolors
-"set t_Co=256
-"let g:ale_enabled = 1
-"let g:ale_completion_enabled = 1
-"let g:ale_go_bingo_executable = 'gopls'
-
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -16,11 +7,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 "Plug 'vim-scripts/VisIncr'
 Plug 'terryma/vim-multiple-cursors'
-"Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
 Plug 'Konfekt/FastFold'
 Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
@@ -30,126 +19,57 @@ Plug 'joshdick/onedark.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ap/vim-buftabline'
-"Plug 'autozimu/LanguageClient-neovim', {
-"    \ 'branch': 'next',
-"    \ 'do': 'bash install.sh',
-"    \ }
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'jremmen/vim-ripgrep'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/echodoc.vim'
 call plug#end()
 
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-    \ 'go': ['/Users/yanzhou3/go/bin/gopls']
-    \ }
-autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
-
+if &compatible
+    set nocompatible
+endif
+let mapleader="\<Space>"
+set noshowmode
 set background=dark
+set termguicolors
+set signcolumn=yes
+set foldenable
+set foldlevelstart=1
+"set foldnestmax=6
+set foldmethod=syntax
 
-let g:onedark_terminal_italics=1
 colorscheme onedark
 
-nnoremap <C-p> :FZF<CR>
-nnoremap <C-Space> :Lines<CR>
-nnoremap <leader>n :Lexplore<CR>
-
-let g:lightline = {'colorscheme': 'onedark'}
-
-"map  <leader>f <Plug>(easymotion-bd-f)
-"nmap <leader>f <Plug>(easymotion-overwin-f)
-"nmap s <Plug>(easymotion-overwin-f2)
-
-let g:workspace_session_directory = $HOME . '/.local/share/nvim/sessions/'
-let g:workspace_session_disable_on_args = 1
-let g:workspace_autosave = 0
-let g:workspace_undodir=$HOME . '/.local/share/nvim/undodir/'
-
-let g:deoplete#auto_complete_delay = 100
-let g:deoplete#enable_at_startup = 1
-
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
-nmap <silent> <C-b> <Plug>(ale_previous_wrap)
-nmap <silent> <C-f> <Plug>(ale_next_wrap)
-
-"if executable('pyls')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'pyls',
-        "\ 'cmd': {server_info->['pyls']},
-        "\ 'whitelist': ['python'],
-        "\ })
-"endif
-
-"" Basic Setup
-"*****************************************************************************"
-"" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set nobomb
 "set binary
 
-"" Tabs. May be overriten by autocmd rules
+set complete-=t   " disable searching tags
+set nobackup
+set noswapfile
+set shellcmdflag=-ic
+if exists('$SHELL')
+    set shell=$SHELL
+else
+    set shell=/bin/bash
+endif
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-
-"" Map leader to ,
-let mapleader="\<Space>"
-
-"" Enable hidden buffers
 set hidden
 
-"" Searching
 set hlsearch
 set ignorecase
 set smartcase
 set nowrapscan
-nnoremap * *N
 
-"" Folding
-set foldenable
-set foldlevelstart=1
-"set foldnestmax=6
-set foldmethod=syntax
-nnoremap <return> za
-
-nnoremap <leader>w :w<cr>
-
-inoremap ( ()<Left>
-inoremap { {}<Left>
-inoremap [ []<Left>
-inoremap " ""<Left>
-inoremap ' ''<Left>
-
-"" Movement
-"nnoremap j gj
-"nnoremap k gk
-"inoremap jk <esc>
-"
-set complete-=t   " disable searching tags
-
-"set iskeyword-=_
-
-"" Directories for swp files
-set nobackup
-set noswapfile
-
-set shellcmdflag=-ic
-
-"set fileformats=dos,unix,mac
-
-if exists('$SHELL')
-    set shell=$SHELL
-else
-    set shell=/bin/sh
-endif
-
-"*****************************************************************************
-"" Visual Settings
-"*****************************************************************************
 set number
 set showcmd
 set nowrap
@@ -159,61 +79,37 @@ set lazyredraw
 set showmatch
 
 set synmaxcol=200
-"syntax sync minlines=256
-
 "let no_buffers_menu=1
-
 set mousemodel=popup
 set mouse=a
-"
-
-"" Disable the blinking cursor.
 set gcr=a:blinkon0
-
-"" Use modeline overrides
-"set modeline
-"set modelines=10
-
 set title
 set titleold="Terminal"
 set titlestring=%F
+set splitbelow
+set splitright
+set clipboard=unnamedplus
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-"*****************************************************************************
-"" Abbreviations
-"*****************************************************************************
-"" no one is really happy until you have this shortcuts
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
-cnoreabbrev Bd bd
-
-" terminal emulation
-"nnoremap <silent> <leader>t :terminal<CR>
+let g:LanguageClient_serverCommands = {
+  \ 'cpp': ['clangd'],
+  \ 'c': ['clangd'],
+  \ }
+let g:echodoc#enable_at_startup = 1
+let g:onedark_terminal_italics=1
+let g:lightline = {'colorscheme': 'onedark'}
+let g:workspace_session_directory = $HOME . '/.local/share/nvim/sessions/'
+let g:workspace_session_disable_on_args = 1
+let g:workspace_autosave = 0
+let g:workspace_undodir=$HOME . '/.local/share/nvim/undodir/'
+let g:deoplete#auto_complete_delay = 100
+let g:deoplete#enable_at_startup = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
     tnoremap <C-v><Esc> <Esc>
 endif
-
-"*****************************************************************************
-"" Autocmd Rules
-"*****************************************************************************
-"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-"augroup vimrc-sync-fromstart
-"autocmd!
-"autocmd BufEnter * :syntax sync maxlines=200
-"augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
@@ -228,15 +124,12 @@ au TermOpen * setlocal nonumber norelativenumber
 "*****************************************************************************
 
 "" Split
-set splitbelow
-set splitright
 noremap _ :<C-u>split<CR>
 noremap \| :<C-u>vsplit<CR>
 
 nnoremap <silent> <leader>wt :ToggleWorkspace<CR>
 
 "" Copy/Paste/Cut
-set clipboard=unnamedplus
 
 nnoremap <leader>B :enew<cr>
 nnoremap <Tab> :bnext<cr>
@@ -251,11 +144,6 @@ cnoremap <c-p>  <up>
 
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
-"" Switching windows
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
-"noremap <C-l> <C-w>l
-"noremap <C-h> <C-w>h
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
 nnoremap <silent> <C-j> :call WinMove('j')<cr>
 nnoremap <silent> <C-k> :call WinMove('k')<cr>
@@ -281,3 +169,28 @@ vmap > >gv
 "" Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <C-p> :FZF<CR>
+nnoremap <C-Space> :Lines<CR>
+nnoremap <leader>n :Lexplore<CR>
+nnoremap * *N
+nnoremap <return> za
+nnoremap <leader>w :w<cr>
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+cnoreabbrev Bd bd
+"nnoremap <silent> <leader>t :terminal<CR>
