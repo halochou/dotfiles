@@ -94,35 +94,35 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: Fantasque Sans Mono
+    family: Victor Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    style: SemiBold
 
   # Bold font face
-  #bold:
+  bold:
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    family: Victor Mono
 
     # The `style` can be specified to pick a specific face.
-    #style: Bold
+    style: Bold
 
   # Italic font face
-  #italic:
+  italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: M+ 1mn
+    family: Victor Mono
 
     # The `style` can be specified to pick a specific face.
-    #style: Italic
+    style: Italic SemiBold
 
   # Point size
-  size: 12.0
+  size: 12.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -513,28 +513,36 @@ key_bindings:
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
 
+# Colors (One Dark)
 colors:
+  # Default colors
   primary:
-    background: '0x2E3440'
-    foreground: '0xD8DEE9'
+    background: '0x282c34'
+    foreground: '0xabb2bf'
+
+  # Cursor colors
   cursor:
-    text: '0x2E3440'
-    cursor: '0xD8DEE9'
+    text: '0x282c34'
+    cursor: '0xabb2bf'
+
+  # Normal colors
   normal:
-    black: '0x3B4252'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x88C0D0'
-    white: '0xE5E9F0'
+    black:   '0x282c34'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xe5c07b'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
+
+  # Bright colors
   bright:
-    black: '0x4C566A'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x8FBCBB'
-    white: '0xECEFF4'
+    black:   '0x3e4452'
+    red:     '0xbe5046'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0x5c6370'

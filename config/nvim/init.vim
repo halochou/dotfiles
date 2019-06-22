@@ -41,7 +41,6 @@ set foldlevelstart=1
 "set foldnestmax=6
 set foldmethod=syntax
 
-colorscheme onedark
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -194,3 +193,5 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 cnoreabbrev Bd bd
 "nnoremap <silent> <leader>t :terminal<CR>
+"
+colorscheme onedark
