@@ -5,19 +5,19 @@ new_float normal
 
 #hide_edge_borders none
 
-font xft:Futura 11
+#font xft:Futura 11
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec rofi -show drun
+bindsym $mod+space exec rofi -show run
 
 focus_follows_mouse no
 
@@ -136,9 +136,9 @@ exec --no-startup-id gnome-flashback
 exec_always --no-startup-id "dropbox start"
 # exec --no-startup-id nm-applet
 
-# exec_always --no-startup-id xset -b
-# exec_always --no-startup-id xset r rate 250 60
-# exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
+exec_always --no-startup-id xset -b
+exec_always --no-startup-id xset r rate 250 60
+exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
 
 # Set inner/outer gaps
 # gaps inner 7
