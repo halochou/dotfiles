@@ -5,7 +5,7 @@ new_float normal
 
 #hide_edge_borders none
 
-#font xft:Futura 11
+font xft:Input Mono 10
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -17,7 +17,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec rofi -show drun
 
 focus_follows_mouse no
 
@@ -44,6 +44,10 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
 
 # workspace back and forth (with/without active container)
 #workspace_auto_back_and_forth no
@@ -93,6 +97,16 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 
+workspace $ws1 output DP-0
+workspace $ws2 output DP-0
+workspace $ws3 output DP-0
+workspace $ws4 output DP-4
+workspace $ws5 output DP-4
+workspace $ws6 output DP-4
+workspace $ws7 output DP-6
+workspace $ws8 output DP-6
+workspace $ws9 output DP-6
+
 bindsym $mod+o move container to output right
 
 # Open specific applications in floating mode
@@ -133,12 +147,12 @@ exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 
-exec_always --no-startup-id "dropbox start"
-# exec --no-startup-id nm-applet
+# exec_always --no-startup-id "dropbox start"
+#exec --no-startup-id nm-applet
 
-exec_always --no-startup-id xset -b
-exec_always --no-startup-id xset r rate 250 60
-exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
+#exec_always --no-startup-id xset -b
+#exec_always --no-startup-id xset r rate 250 60
+#exec_always --no-startup-id "setxkbmap -option ctrl:nocaps -option altwin:swap_lalt_lwin"
 
 # Set inner/outer gaps
 # gaps inner 7
@@ -172,10 +186,11 @@ set $base0F #AB7967
 
 # Basic bar configuration using the Base16 variables.
 bar {
-    #status_command i3status
+    status_command i3status
     position top
     strip_workspace_numbers yes
     workspace_buttons yes
+    mode hide
     colors {
         background $base00
         separator  $base01

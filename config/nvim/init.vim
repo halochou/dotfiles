@@ -26,7 +26,12 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
-
+Plug 'sheerun/vim-polyglot'
+Plug 'jwilm/i3-vim-focus'
+Plug 'flazz/vim-colorschemes'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-vinegar'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 if &compatible
@@ -37,10 +42,9 @@ set noshowmode
 set background=dark
 set termguicolors
 set signcolumn=yes
-set foldenable
-set foldlevelstart=1
 "set foldnestmax=6
 set foldmethod=syntax
+set nofoldenable
 
 
 set encoding=utf-8
@@ -91,12 +95,15 @@ set splitright
 set clipboard=unnamedplus
 
 let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['clangd'],
-  \ 'c': ['clangd'],
+  \ 'cc': ['clangd-8'],
+  \ 'cpp': ['clangd-8'],
+  \ 'hpp': ['clangd-8'],
+  \ 'c': ['clangd-8'],
+  \ 'h': ['clangd-8'],
   \ }
 let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
 let g:onedark_terminal_italics=1
-let g:lightline = {'colorscheme': 'onedark'}
 let g:workspace_session_directory = $HOME . '/.local/share/nvim/sessions/'
 let g:workspace_session_disable_on_args = 1
 let g:workspace_autosave = 0
@@ -170,7 +177,7 @@ vmap > >gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <leader>m :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-Space> :Lines<CR>
@@ -195,4 +202,6 @@ cnoreabbrev Qall qall
 cnoreabbrev Bd bd
 "nnoremap <silent> <leader>t :terminal<CR>
 "
-colorscheme onedark
+let g:jellybeans_use_term_italics = 1
+let g:lightline = {'colorscheme': 'jellybeans'}
+colorscheme base16-default-dark
