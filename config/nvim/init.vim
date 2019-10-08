@@ -9,27 +9,27 @@ Plug 'ervandew/supertab'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-repeat'
-Plug 'jiangmiao/auto-pairs'
 Plug 'Konfekt/FastFold'
 Plug 'Konfekt/FoldText'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-signify'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ap/vim-buftabline'
-Plug 'jremmen/vim-ripgrep'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/echodoc.vim'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/echodoc.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'jwilm/i3-vim-focus'
-Plug 'flazz/vim-colorschemes'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'ycm-core/YouCompleteMe'
 Plug 'tpope/vim-vinegar'
 Plug 'chriskempson/base16-vim'
 call plug#end()
@@ -56,7 +56,7 @@ set nobomb
 set complete-=t   " disable searching tags
 set nobackup
 set noswapfile
-set shellcmdflag=-ic
+"set shellcmdflag=-ic
 if exists('$SHELL')
     set shell=$SHELL
 else
@@ -78,14 +78,14 @@ set number
 set showcmd
 set nowrap
 "set relativenumber
-"set cursorline
+autocmd InsertEnter,InsertLeave * set cul!
 set lazyredraw
 set showmatch
 
 set synmaxcol=200
 "let no_buffers_menu=1
-set mousemodel=popup
-set mouse=a
+"set mousemodel=popup
+"set mouse=a
 set gcr=a:blinkon0
 set title
 set titleold="Terminal"
@@ -95,14 +95,14 @@ set splitright
 set clipboard=unnamedplus
 
 let g:LanguageClient_serverCommands = {
-  \ 'cc': ['clangd-8'],
-  \ 'cpp': ['clangd-8'],
-  \ 'hpp': ['clangd-8'],
-  \ 'c': ['clangd-8'],
-  \ 'h': ['clangd-8'],
+  \ 'cc': ['clangd-9'],
+  \ 'cpp': ['clangd-9'],
+  \ 'hpp': ['clangd-9'],
+  \ 'c': ['clangd-9'],
+  \ 'h': ['clangd-9'],
   \ }
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
+let g:echodoc#type = 'signature'
 let g:onedark_terminal_italics=1
 let g:workspace_session_directory = $HOME . '/.local/share/nvim/sessions/'
 let g:workspace_session_disable_on_args = 1
@@ -178,10 +178,13 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 nnoremap <leader>m :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>jd :call LanguageClient#textDocument_definition()<CR>
+
+"nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-f> :Rg<CR>
 nnoremap <C-Space> :Lines<CR>
-nnoremap <leader>n :Lexplore<CR>
 nnoremap * *N
 nnoremap <return> za
 nnoremap <leader>w :w<cr>
@@ -204,4 +207,8 @@ cnoreabbrev Bd bd
 "
 let g:jellybeans_use_term_italics = 1
 let g:lightline = {'colorscheme': 'jellybeans'}
-colorscheme base16-default-dark
+colorscheme base16-oceanicnext
+
+
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
