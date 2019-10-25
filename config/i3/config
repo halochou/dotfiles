@@ -1,6 +1,6 @@
 set $mod Mod4
 
-new_window pixel 3
+new_window pixel 2
 new_float normal
 
 #hide_edge_borders none
@@ -17,9 +17,9 @@ bindsym $mod+Return exec kitty #i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec "rofi -modi run,drun -show drun"
+bindsym $mod+space exec rofi -show drun
 
-focus_follows_mouse no
+focus_follows_mouse yes
 
 # change focus
 bindsym $mod+h focus left
@@ -45,27 +45,25 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s layout toggle split
 
 # workspace back and forth (with/without active container)
-#workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 
 # split orientation
-bindsym $mod+bar split h;exec notify-send 'tile horizontally'
-bindsym $mod+minus split v;exec notify-send 'tile vertically'
-# bindsym $mod+Shift+q split toggle
+bindsym $mod+BackSpace split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 #navigate workspaces next / previous
-#bindsym $mod+bracketright workspace next
-#bindsym $mod+bracketleft workspace prev
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # Workspace names
 set $ws1 1
@@ -120,7 +118,7 @@ for_window [urgent=latest] focus
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
