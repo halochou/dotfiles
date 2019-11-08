@@ -26,6 +26,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'Shougo/echodoc.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 if &compatible
@@ -88,9 +89,8 @@ set splitbelow
 set splitright
 set clipboard=unnamedplus
 
-let g:ale_completion_enabled = 1
 let g:ale_c_clangd_options = '--header-insertion=never'
-let g:ale_lint_on_insert_leave = 1
+let g:ale_completion_enabled = 1
 "let g:LanguageClient_serverCommands = {
   "\ 'cc': ['clangd-9', '--header-insertion=never'],
   "\ 'cpp': ['clangd-9', '--header-insertion=never'],
@@ -141,13 +141,11 @@ nnoremap <Tab> :bnext<cr>
 nnoremap <S-Tab> :bprevious<cr>
 "nnoremap <leader>bd :bp <bar> bd! #<cr>
 nnoremap <leader>bd :bd<cr>
-"cycle between last two open buffers
-nnoremap <leader><leader> <c-^>
 
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 
-nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>:ALELint<cr><c-l>
 
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
 nnoremap <silent> <C-j> :call WinMove('j')<cr>
@@ -175,9 +173,14 @@ vmap > >gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <leader>jd :ALEGoToDefinition<CR>
-nnoremap <leader>jfr :ALEFindReferences<CR>
+nnoremap <leader>j :ALEGoToDefinition<CR>
+nnoremap <leader>f :ALEFindReferences<CR>
+nnoremap <leader><leader> :ALELint<CR>
+nnoremap <leader>n :ALENext<CR>
+nnoremap <leader>N :ALEPrevious<CR>
+nnoremap <leader>gg :ALEFirst<CR>
 
+nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <C-Space> :Lines<CR>
@@ -202,5 +205,5 @@ cnoreabbrev Bd bd
 "nnoremap <silent> <leader>t :terminal<CR>
 "
 let g:onedark_terminal_italics = 1
-let g:lightline = {'colorscheme': 'one'}
-colorscheme onedark
+let g:lightline = {'colorscheme': 'Tomorrow_Night'}
+colorscheme base16-tomorrow-night

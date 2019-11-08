@@ -5,13 +5,14 @@ new_float normal
 
 #hide_edge_borders none
 
-font xft:Victor Mono Bold 11
+font xft:RobotoCondensed 12
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty #i3-sensible-terminal
+#bindsym $mod+Return exec kitty #i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -165,22 +166,22 @@ exec --no-startup-id gnome-flashback
 
 
 ## Base16 OceanicNext
-set $base00 #1B2B34
-set $base01 #343D46
-set $base02 #4F5B66
-set $base03 #65737E
-set $base04 #A7ADBA
-set $base05 #C0C5CE
-set $base06 #CDD3DE
-set $base07 #D8DEE9
-set $base08 #EC5f67
-set $base09 #F99157
-set $base0A #FAC863
-set $base0B #99C794
-set $base0C #5FB3B3
-set $base0D #6699CC
-set $base0E #C594C5
-set $base0F #AB7967
+set $base00 #1d1f21
+set $base01 #282a2e
+set $base02 #373b41
+set $base03 #969896
+set $base04 #b4b7b4
+set $base05 #c5c8c6
+set $base06 #e0e0e0
+set $base07 #ffffff
+set $base08 #cc6666
+set $base09 #de935f
+set $base0A #f0c674
+set $base0B #b5bd68
+set $base0C #8abeb7
+set $base0D #81a2be
+set $base0E #b294bb
+set $base0F #a3685a
 
 # Basic bar configuration using the Base16 variables.
 bar {
@@ -188,7 +189,7 @@ bar {
     position top
     strip_workspace_numbers yes
     workspace_buttons yes
-    mode hide
+    # mode hide
     colors {
         background $base00
         separator  $base01
