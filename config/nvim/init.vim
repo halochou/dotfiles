@@ -21,7 +21,7 @@ Plug 'ap/vim-buftabline'
     "\ 'branch': 'next',
     "\ 'do': 'bash install.sh',
     "\ }
-Plug 'tpope/vim-vinegar'
+"Plug 'tpope/vim-vinegar'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'Shougo/echodoc.vim'
 Plug 'sheerun/vim-polyglot'
@@ -88,6 +88,12 @@ set titlestring=%F
 set splitbelow
 set splitright
 set clipboard=unnamedplus
+
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 let g:ale_c_clangd_options = '--header-insertion=never'
 let g:ale_completion_enabled = 1
